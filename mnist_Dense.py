@@ -18,7 +18,7 @@ wandb.init(
     name="experimento_2",    # Nombre de la corrida
     config={
         "epochs": 10,
-        "batch_size": 32,
+        "batch_size": 64,
         "optimizer": "sgd",
         "loss": "categorical_crossentropy",
         "architecture": "Dense(30, relu) -> Dense(10, softmax)"
@@ -78,5 +78,6 @@ print(f"Test accuracy: {test_acc:.4f}, Test loss: {test_loss:.4f}")
 # Guardar el modelo entrenado en wandb
 model.save("mnist_dense_final.h5")
 wandb.save("mnist_dense_final.h5")
+
 
 
