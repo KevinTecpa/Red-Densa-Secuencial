@@ -41,15 +41,18 @@ y_test_cat = keras.utils.to_categorical(y_test, 10)
 
 # Definir el modelo secuencial denso
 
+
 model = keras.Sequential([
-    layers.Input(shape=(784,)),       # capa de entrada
-    layers.Dense(30, activation="relu"),  # capa oculta (30 neuronas)
-    layers.Dense(10, activation="softmax") # capa de salida (10 clases)
+    keras.layers.Input(shape=(784,)),
+    keras.layers.Dense(60, activation="relu"),
+    keras.layers.Dense(60, activation="relu"),#dos capas ocultas en vez de solo una
+    keras.layers.Dense(10, activation="softmax")
 ])
+
 
 # Compilar el modelo
 model.compile(
-    optimizer=keras.optimizers.SGD(learning_rate=0.5),  # SGD como en el código original
+    optimizer=keras.optimizers.SGD(learning_rate=1e-3),  # SGD como en el código original
     loss="categorical_crossentropy",                    # función de costo
     metrics=["accuracy"]
 )
@@ -78,5 +81,6 @@ print(f"Test accuracy: {test_acc:.4f}, Test loss: {test_loss:.4f}")
 # Guardar el modelo entrenado en wandb
 model.save("mnist_dense_final.h5")
 wandb.save("mnist_dense_final.h5")
+
 
 
